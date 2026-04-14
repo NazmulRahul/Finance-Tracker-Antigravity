@@ -1,0 +1,22 @@
+services:
+  api:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend/.env
+    restart: always
+
+  client:
+    build:
+      context: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    restart: always
+
+networks:
+  default:
+    name: finance-network
