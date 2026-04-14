@@ -3,7 +3,7 @@ services:
     name: finance-tracker-api
     runtime: docker
     plan: free
-    dockerFilePath: backend/Dockerfile
+    dockerfilePath: backend/Dockerfile
     dockerContext: backend
     envVars:
       - key: PORT
