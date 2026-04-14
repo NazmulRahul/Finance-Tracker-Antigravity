@@ -1,4 +1,4 @@
-# Finance Dashboard - Finance Tracker
+# Finance Dashboard - Finance Tracker Built using Antigravity 
 
 A full-stack finance dashboard application built with the MERN stack (MongoDB, Express, React, Node.js).
 
