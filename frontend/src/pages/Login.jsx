@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { LogIn, Mail, Lock } from 'lucide-react';
 import { apiFetch } from '../utils/api';
 import GlassCard from '../components/GlassCard';
 
 const Login = () => {
+  const [searchParams] = useSearchParams();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState(searchParams.get('error') === 'verification_failed' ? 'Email verification failed. The link may be invalid or expired.' : '');
   const [loading, setLoading] = useState(false);
+  const [verified, setVerified] = useState(searchParams.get('verified') === 'true');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -43,6 +45,7 @@ const Login = () => {
 
         <GlassCard className="p-8 w-full border-t-4 border-t-brandPrimary">
           <h2 className="text-2xl font-bold mb-6">Welcome Back</h2>
+          {verified && <p className="bg-income/10 text-income p-3 rounded-lg text-sm text-center mb-6 border border-income/20">Email verified successfully! You can now log in.</p>}
           {error && <p className="bg-expense/10 text-expense p-3 rounded-lg text-sm text-center mb-6 border border-expense/20">{error}</p>}
           
           <form onSubmit={handleSubmit} className="space-y-5">

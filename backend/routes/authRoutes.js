@@ -37,7 +37,7 @@ router.post('/register', async (req, res) => {
     });
 
     // Send Verification Email using specialized function
-    const verificationLink = `${process.env.FRONTEND_URL}/verify-email/${verificationToken}`;
+    const verificationLink = `${process.env.BACKEND_URL}/api/auth/verify/${verificationToken}`;
     
     try {
       await sendVerificationEmail({
@@ -68,16 +68,16 @@ router.get('/verify/:token', async (req, res) => {
     const user = await User.findOne({ verificationToken: req.params.token });
 
     if (!user) {
-      return res.status(400).json({ success: false, data: { message: 'Invalid or expired verification token' } });
+      return res.redirect(`${process.env.FRONTEND_URL}/login?error=verification_failed`);
     }
 
     user.isVerified = true;
     user.verificationToken = undefined;
     await user.save();
 
-    res.json({ success: true, data: { message: 'Email verified successfully. You can now log in.' } });
+    res.redirect(`${process.env.FRONTEND_URL}/login?verified=true`);
   } catch (error) {
-    res.status(500).json({ success: false, data: { message: error.message } });
+    res.redirect(`${process.env.FRONTEND_URL}/login?error=${encodeURIComponent(error.message)}`);
   }
 });
 
