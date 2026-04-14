@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Dark Mode Default Tokens */
+  --bg-dark: #020617;
+  --bg-card: rgba(30, 41, 59, 0.7);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --primary: #38bdf8;
+  --primary-hover: #0ea5e9;
+  --income: #4ade80;
+  --expense: #f43f5e;
+  --border: rgba(51, 65, 85, 0.5);
+  --glass-blend: overlay;
+}
+
+[data-theme='light'] {
+  /* Light Mode Tokens (Slate-50 Based) */
+  --bg-dark: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.8);
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --primary: #0ea5e9;
+  --primary-hover: #0284c7;
+  --income: #16a34a;
+  --expense: #e11d48;
+  --border: rgba(203, 213, 225, 0.8);
+  --glass-blend: normal;
+}
+
+@layer base {
+  body {
+    @apply bg-darkBg text-textMain antialiased font-sans transition-colors duration-300;
+  }
+}
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply rounded-full transition-colors;
+    background-color: var(--border);
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary);
+  }
+}
