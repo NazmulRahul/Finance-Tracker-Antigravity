@@ -20,7 +20,7 @@ const VerifyEmail = () => {
         
         // Auto-redirect to login after 3 seconds on success
         timeout = setTimeout(() => {
-          navigate('/login');
+          navigate('/login?verified=true');
         }, 3000);
       } catch (err) {
         setStatus('error');
